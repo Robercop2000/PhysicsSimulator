@@ -1,13 +1,25 @@
-﻿add_library(physics_engine STATIC
-    src/core/world.cpp
-    src/core/simulation.cpp
-    src/physics/rigid_body.cpp
-    src/physics/integrator.cpp
-    src/physics/collider.cpp
-    src/math/vector3.cpp
+﻿add_library(engine)
+
+target_sources(engine
+    PRIVATE
+
+    src/physics/core/physics_world.cpp
+
+    src/physics/integration/verlet_integrator.cpp
+    src/physics/integration/euler_integrator.cpp
+
+    src/physics/forces/gravity_force.cpp
+    src/physics/forces/spring_force.cpp
+
+    src/physics/registry/force_registry.cpp
 )
 
-target_include_directories(physics_engine
+target_include_directories(engine
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_compile_features(engine
+    PUBLIC
+        cxx_std_20
 )
